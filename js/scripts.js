@@ -88,7 +88,9 @@ const multiplica = (num1, num2) => {
   return num1 * num2;
 };
 
-const multiplica2 = (num1, num2) => num1 * num2;
+const multiplica2 = (num1, num2) => (
+  num1 * num2
+);
 
 const multiplica3 = (num1, num2) => num1 * num2;
 
@@ -197,6 +199,7 @@ const contatos =
 // forEach - Simular ao for - Não retorna nada;
 const contatosForEach = contatos.forEach((contato) => {
     console.log(contato.nome)
+    //return não funciona
     return contato.nome 
 })
 
@@ -214,7 +217,7 @@ const numerosNaturais = [1,2,3,4,5,6,7,8,9,10];
 
 //  filter() filtra um array - Caso a condição seja falsa, 
 // o elemento não entra no novo array
-const numerosPares = numerosNaturais.filter( numero => numero % 2 === 0)
+const numerosPares = numerosNaturais.filter( numero => numero.algumChave % 2 === 0)
 
 console.log(numerosPares)
 
@@ -222,4 +225,50 @@ const contatosComA = contatos.filter(contato => contato.nome[0] === 'A' || conta
 
 console.log(contatosComA)
 
+// REQUISIÇÕES -> Funções Assíncronas
+
+const url = 'https://jsonplaceholder.typicode.com/users'
+
+//Async - Await
+const getData = async () => {
+  const response = await fetch(url);
+  const dados = await response.json();
+  
+  console.log(dados);
+}
+
+//Função normal Assíncrona
+async function assincrona() {
+  //códigos...
+}
+
+getData();
+
+// .then()
+// const getData2 = () => {
+//   fetch(url)
+//     .then( response => response.json())
+//     .then( resp =>  console.log(resp))
+// }
+
+// getData2();
+
+
+
+// Fazer fetch de https://jsonplaceholder.typicode.com/todos
+// Salvar no array tarefas
+// Consolar o Array
+
+//Criar novo array com as tarefas do userId 1 - Utilizar Filter
+ //Exibir no console
+
+const getTodos = async() => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+  const tarefas = await response.json();
+  console.log(tarefas)
+
+  const tarefasUserId1 = tarefas.filter( tarefa => tarefa.userId === 1)
+  console.log(tarefasUserId1)
+}
+getTodos();
 
