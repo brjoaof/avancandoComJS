@@ -5,7 +5,7 @@ titulo.innerText = "Avançando com Javascript!";
 
 //Insire dentro de outro elemento;
 const container = document.querySelector("#container");
-container.appendChild(titulo);
+// container.appendChild(titulo);
 
 // If e Ternário
 const idade = 18;
@@ -262,13 +262,30 @@ getData();
 //Criar novo array com as tarefas do userId 1 - Utilizar Filter
  //Exibir no console
 
+const loading = document.querySelector("#loading");
+const todosContainer = document.querySelector("#todosContainer");
+
 const getTodos = async() => {
   const response = await fetch('https://jsonplaceholder.typicode.com/todos');
   const tarefas = await response.json();
-  console.log(tarefas)
+  loading.classList.add('hide');
 
   const tarefasUserId1 = tarefas.filter( tarefa => tarefa.userId === 1)
   console.log(tarefasUserId1)
+
+  tarefas.forEach(tarefa => {
+    const todoContainer = document.createElement('div');
+    const titulo = document.createElement('h2');
+    const completed = document.createElement('p');
+    titulo.innerText = 'Título: '+ tarefa.title;
+    completed.innerText = "Concluída: " + tarefa.completed;
+    todoContainer.appendChild(titulo);
+    todoContainer.appendChild(completed);
+
+    todosContainer.appendChild(todoContainer);
+  })
+
 }
 getTodos();
+
 
